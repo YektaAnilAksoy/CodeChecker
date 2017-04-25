@@ -30,6 +30,7 @@ public class CheckerProcess implements Runnable {
     public CheckerProcess(String lang,String path,List<TestCaseModel> testcases,long timeInMillis,ResponseModel response){
         this.lang = lang;
     	this.path = path;
+    	
     	this.testcases = testcases;
         this.timeInMillis = timeInMillis;
         this.response = response;
