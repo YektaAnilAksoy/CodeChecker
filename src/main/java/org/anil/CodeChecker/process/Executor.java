@@ -36,7 +36,14 @@ public class Executor {
 
         if(lang.equals("java")){
             p = new ProcessBuilder("java","Solution");
-        }else{
+        }
+        else if(lang.equals("c")){
+            p = new ProcessBuilder("./a.out");
+        }
+        else if(lang.equals("c++")){
+            p = new ProcessBuilder("./a.out");
+        }
+        else{
             System.out.println("language is not correct...");
             p = null;
         }
@@ -45,8 +52,7 @@ public class Executor {
 
         p.redirectErrorStream(true);
 
-        System.out.println("Current directory "+System.getProperty("user.dir"));
-
+       // System.out.println("Current directory "+System.getProperty("user.dir"));
 
         try{
             Process pp = p.start();
@@ -62,17 +68,18 @@ public class Executor {
             OutputStream outputstream = pp.getOutputStream();
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputstream));
             writer.write(input);
+            
             writer.flush();
             writer.close();
 
-
             if(!pp.waitFor(timeInMillis, TimeUnit.MILLISECONDS)){
                 System.out.println("TİME LİMİT EXCEED !!!! ");
-                model.setTimelimit(true);
+                model.setTimelimit(true);       
                 return model;
             }
 
             else{
+
                 model.setTimelimit(false);
                 int exitCode = pp.exitValue();
                 System.out.println("Exit Value = "+pp.exitValue());
@@ -94,6 +101,8 @@ public class Executor {
             }
             String result = builder.toString();
             System.out.println(" output:"+result+" input:"+input);
+            if(result.charAt(result.length()-1) == ' ')
+            	result = result.substring(0, result.length()-1);
             if(result.equals(output)){
                 model.setSuccess(true);
                 model.setWronganswer(false);
@@ -119,7 +128,7 @@ public class Executor {
 
         System.out.println("CODE EXECUTION FINISHED !");
 
-        //DELETING EXECUTABLES
+
         return model;
     }
 
