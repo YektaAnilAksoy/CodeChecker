@@ -92,12 +92,12 @@ public class CheckerProcess implements Runnable {
             	response.setResponsecases(responsecases);
                         
         	}
-        	//Sets the score which user gets.
-        	
+        	//Sets the score which user gets
         	response.setScore((int)(numberofsuccess*testcasescore));
         	System.out.println("submitted score = "+response.getScore());
         }
         else{
+        	response.setScore(0);
             response.setCompilationerror(true);
             response.setErrormessage(compilationresult);
             System.out.println("Compilation error = "+compilationresult);
